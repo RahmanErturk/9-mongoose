@@ -6,7 +6,10 @@ export const getAll = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  const result = await Customer.create({ ...req.body });
-
-  res.status(201).json(result);
+  try {
+    const result = await Customer.create(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
 };
